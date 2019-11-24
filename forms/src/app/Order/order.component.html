@@ -1,0 +1,109 @@
+<form [formGroup]="formulario" >
+    <div class="form-group">
+        <div class="row">
+            <div class="col-sm-12">
+                <label for="Id">IdOrder:</label>
+            </div>
+            <div class="col-sm-2">
+                <input type="text" class="form-control" id="orderIdFrm" placeholder="" [(ngModel)]="orID"
+                    formControlName="orderIdFrm" />
+                   
+            </div>
+            <div class="col-sm-4">
+                    <button class="btn btn-success" (click)="GetOrder()" [disabled]="!orID"> Procurar Pedido por ID</button>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="row">
+            <div class="col-sm-4">
+                <label for="status">Status:</label>
+                <input type="text" class="form-control" id="status" placeholder="" formControlName="status" />
+            </div>
+
+            <div class="col-sm-4">
+                <label for="createAt">Data Criação:</label>
+                <input type="text" class="form-control" id="createAt" placeholder=""
+                    formControlName="createAt" />
+            </div>
+
+            <div class="col-sm-4">
+                    <label for="updateAt">Data Alteração:</label>
+                <input type="text" class="form-control" id="updateAt" placeholder=""
+                    formControlName="updateAt" />
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+            <div class="row">
+                <div class="col-sm-4">
+                    <label for="clientId">Id do Cliente:</label>
+                    <input type="text" class="form-control" id="clientId" placeholder="" formControlName="clientId" />
+                </div>
+    
+                <div class="col-sm-4">
+                    <label for="nomeCliente">Cliente:</label>
+                    <input type="text" class="form-control" id="nomeCliente" placeholder=""
+                        formControlName="nomeCliente" />
+                </div>
+    
+                <div class="col-sm-4">
+                        <label for="cpf">CPF:</label>
+                    <input type="text" class="form-control" id="cpf" placeholder=""
+                        formControlName="cpf" />
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <button class="btn btn-dark" (click)="GetListOrder()"  [disabled]="!orID"> Listar Itens do Pedido </button>
+                    </div>
+                    <div class="col-sm-4">
+                        <button class="btn btn-primary" (click)="GetUpdateStatusOrder()" [disabled]="!orID"> Alterar Status Pedido </button>
+                    </div>
+                </div>
+        </div>
+
+   <div class="form-group" *ngIf="visibleGrid">
+    <div class="row">
+       <div class="col-sm-12">
+            <div class="card mt-3">
+                    <div class="card-header">
+                      <div class="float-left">
+                        <h4>Itens do Pedido </h4>
+                      </div>
+                    </div>
+                    <div class="card-body">
+                      <table class="table table-hover" >
+                        <thead>
+                          <tr>
+                            <th>#</th>
+                            <th>Curso</th>
+                            <th>Criado em</th>
+                            <th>Alterado em</th>
+                            <th>Status</th>
+                            <th>Preço</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let prod of products">
+                            <td>{{ prod.id }}</td>
+                            <td>{{ prod.name }}</td>
+                            <td>{{ prod.createAt }}</td>
+                            <td>{{ prod.updateAt }}</td>
+                            <td>{{ prod.status }}</td>
+                            <td>{{ prod.price.value }}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+
+                    </div>
+                  </div>
+                  
+       </div> 
+    </div>
+   </div>
+
+</form>
+

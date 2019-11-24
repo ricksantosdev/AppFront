@@ -1,0 +1,98 @@
+<form #f="ngForm" (ngSubmit)="onSubmit(f)">
+    <div class="form-group" >
+        <div class="row">
+            <div class="col-sm-12">
+                <label for="nome">Nome:</label>
+            </div>
+            <div class="col-sm-12">
+                <input type="text" class="form-control" id="nome" placeholder="Digite seu nome" name="nome"
+                    [(ngModel)]="usuario.nome" required #nome="ngModel"
+                    [class.is-invalid]="verificaValidTouched(nome)" />
+                <app-campo-control [mostrarErro]="verificaValidTouched(nome)" msg="Nome"></app-campo-control>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="row">
+            <div class="col-sm-12">
+                <label for="email">Email:</label>
+            </div>
+            <div class="col-sm-12">
+                <input type="text" class="form-control" id="email" placeholder="Digite seu email" name="email"
+                    [(ngModel)]="usuario.email" required #email="ngModel"
+                    [class.is-invalid]="verificaValidTouched(email)" />
+                    <app-campo-control [mostrarErro]="verificaValidTouched(email)" msg="Email"></app-campo-control>
+            </div>
+        </div>
+    </div>
+    <!-- Criando um objeto do tipo endereco com a diretiva ngModelGroup-->
+    <div ngModelGroup="endereco">
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-3">
+                <label for="cep" class="control-label">CEP</label>
+                <input type="text" class="form-control" id="cep" name="cep" ngModel required #cep="ngModel" 
+                [class.is-invalid]="verificaValidTouched(cep)" 
+                (blur)="consultaCep($event.target.value , f)" />
+                <app-campo-control [mostrarErro]="verificaValidTouched(cep)" msg="cep"></app-campo-control>
+            </div>
+            <div class="col-md-3">
+                <label for="numero" class="control-label">Número</label>
+                <input type="text" class="form-control" id="numero" name="numero" ngModel required #numero="ngModel" 
+                [class.is-invalid]="verificaValidTouched(numero)"/>
+                <app-campo-control [mostrarErro]="verificaValidTouched(numero)" msg="numero"></app-campo-control>
+            </div>
+            <div class="col-md-6">
+                <label for="complemento" class="control-label">Complemento</label>
+                <input type="text" class="form-control" id="complemento" name="complemento" ngModel required
+                    #complemento="ngModel" [class.is-invalid]="verificaValidTouched(complemento)"/>
+                    <app-campo-control [mostrarErro]="verificaValidTouched(complemento)" msg="complemento"></app-campo-control>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="row">
+            <div class="col-sm-12">
+                <label for="rua" class="control-label">Rua</label>
+                <input type="text" class="form-control" id="rua" name="rua" ngModel required #rua="ngModel"
+                [class.is-invalid]="verificaValidTouched(rua)" />
+                <app-campo-control [mostrarErro]="verificaValidTouched(rua)" msg="rua"></app-campo-control>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-4">
+                <label for="bairro" class="control-label">Bairro</label>
+                <input type="text" class="form-control" id="bairro" name="bairro" ngModel required #bairro="ngModel"
+                [class.is-invalid]="verificaValidTouched(bairro)" />
+                <app-campo-control [mostrarErro]="verificaValidTouched(bairro)" msg="bairro"></app-campo-control>
+            </div>
+            <div class="col-md-4">
+                <label for="cidade" class="control-label">Cidade</label>
+                <input type="text" class="form-control" id="cidade" name="cidade" ngModel required #cidade="ngModel" 
+                [class.is-invalid]="verificaValidTouched(cidade)"/>
+                <app-campo-control [mostrarErro]="verificaValidTouched(cidade)" msg="cidade"></app-campo-control>
+            </div>
+            <div class="col-md-4">
+                <label for="estado" class="control-label">Estado</label>
+                <input type="text" class="form-control" id="estado" name="estado" ngModel required #estado="ngModel"
+                [class.is-invalid]="verificaValidTouched(estado)" />
+                <app-campo-control [mostrarErro]="verificaValidTouched(estado)" msg="estado"></app-campo-control>
+            </div>
+        </div>
+    </div>
+</div>
+    <div class="form-group">
+        <div class="row">
+            <div class="col-sm-12">
+                <!--usando a propriedade disabled para o botao html5-->
+                <button type="submit" class="btn btn-primary" [disabled]="!f.valid" (onSubmit)="f"> Enviar</button>
+                <button  class="btn btn-success" (click)="resetar(f)"> Resetar</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+<!--criando um debug para valores de formulario -->
+<app-template-form-detalhe [form]="f"></app-template-form-detalhe>
